@@ -14,6 +14,11 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import Interface.PlaceHolder
+import android.widget.Button
+import android.widget.ImageButton
+import android.widget.TextView
+import android.widget.Toast
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -36,7 +41,8 @@ class Home : Fragment() {
     private lateinit var productAdapter: ProductAdapter
     private lateinit var recycler: RecyclerView
     private lateinit var service: PlaceHolder
-   // private lateinit var mutableList: MutableList<Product>
+    val productObj= Product("","Ron Cartavio",50,"Lorem lor as  dsllroes lreosd lsdoers sdleorslre sldeosasl das",100,"https://licoreriadisenzo.pe/wp-content/uploads/2020/09/CARTAVIO-BLACK-750-ML-300x300.jpg","6332876c1cde739d4af5e7c2","6335fe7c5968fe469e3bdd71")
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,7 +53,7 @@ class Home : Fragment() {
         }
         productAdapter = ProductAdapter(mutableListOf())
         val retrofit = Retrofit.Builder()
-            .baseUrl("https://my-json-server.typicode.com/LITO-TR/bdShop/")
+            .baseUrl("https://express-shopapi.herokuapp.com/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
         service = retrofit.create<PlaceHolder>(PlaceHolder::class.java)
@@ -98,7 +104,6 @@ class Home : Fragment() {
                                 ,item.stock
                                 ,item.img
                                 ,item.campus
-                                ,item.__v
                                 ,item.category
                             )
                         )
@@ -115,7 +120,35 @@ class Home : Fragment() {
                 t?.printStackTrace()
             }
         })
+        val btnAdd=view.findViewById<FloatingActionButton>(R.id.btnAddProduct)
+        btnAdd.setOnClickListener(){
+            service.addProduct(productObj).enqueue(object :Callback<Product>{
+                override fun onResponse(call: Call<Product>, response: Response<Product>) {
+                    val toast: Toast = Toast.makeText(context,"${response.body()}", Toast.LENGTH_LONG);
+                    toast.show()
+                }
 
+                override fun onFailure(call: Call<Product>, t: Throwable) {
+                    t?.printStackTrace()                }
+
+            })
+        }
+
+        /*val btnDelete=view.findViewById<Button>(R.id.btnDelete)
+
+        btnDelete.setOnClickListener{
+            service.deleteProduct(view.findViewById<TextView>(R.id.txtId).toString()).enqueue(object :Callback<Void>{
+                override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                    val toast: Toast = Toast.makeText(context,"${response.body()}", Toast.LENGTH_LONG);
+                    toast.show()
+                }
+
+                override fun onFailure(call: Call<Void>, t: Throwable) {
+                    TODO("Not yet implemented")
+                }
+
+            })
+        }*/
 
     }
 

@@ -4,19 +4,31 @@ import Beans.Product
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.Body
+import retrofit2.http.DELETE
+import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Path
 interface PlaceHolder {
 
-    @GET("products")
+    @GET("api/products")
     fun getListProducts(): Call<List<Product>>
 
-    @GET("customers")
+    @POST("api/products")
+    fun addProduct(
+        @Body product: Product
+    ): Call<Product>
+
+    @DELETE("api/products/{_id}")
+    fun deleteProduct(
+        @Path("_id") _id:String
+    ): Call<Void>
+
+    @GET("api/customers")
     fun getCustomers(): Call<List<Customer>>
 
-    @POST("customers")
+    @POST("api/customers")
     fun addCustomer(
         @Body customer: Customer
-    ): Response<Customer>
+    ): Call<Customer>
 }

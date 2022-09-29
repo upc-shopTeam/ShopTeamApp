@@ -7,9 +7,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Recycler
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -30,6 +33,7 @@ class Profile : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+    val customerObj=Customer("Elvert","elvert@gmail","97713721","rurur")
 
     private lateinit var customerAdapter: CustomerAdapter
     private lateinit var recycler: RecyclerView
@@ -43,7 +47,7 @@ class Profile : Fragment() {
         }
         customerAdapter= CustomerAdapter(mutableListOf())
         val retrofit = Retrofit.Builder()
-            .baseUrl("https://my-json-server.typicode.com/LITO-TR/bdShop/")
+            .baseUrl("https://express-shopapi.herokuapp.com/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
         service = retrofit.create<PlaceHolder>(PlaceHolder::class.java)
@@ -91,8 +95,8 @@ class Profile : Fragment() {
                     for (item in cus) {
                         listCust.add(
                             Customer(
-                             item._id
-                            ,item.name
+                           //  item._id
+                            item.name
                             ,item.email
                             ,item.phoneNumber
                             ,item.photo
@@ -114,5 +118,22 @@ class Profile : Fragment() {
             }
 
         })
+        val btnAdd=view.findViewById<FloatingActionButton>(R.id.btnAddCustomer)
+        btnAdd.setOnClickListener(){
+
+            service.addCustomer(customerObj).enqueue(object :Callback<Customer>{
+                override fun onResponse(call: Call<Customer>, response: Response<Customer>) {
+                    val toast: Toast=Toast.makeText(context,"${response.body()}",Toast.LENGTH_LONG);
+                    toast.show()
+                }
+
+                override fun onFailure(call: Call<Customer>, t: Throwable) {
+                    TODO("Not yet implemented")
+                }
+
+            })
+
+        }
+
     }
 }
