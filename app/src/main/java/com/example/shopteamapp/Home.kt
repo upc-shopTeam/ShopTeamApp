@@ -41,7 +41,7 @@ class Home : Fragment() {
     private lateinit var productAdapter: ProductAdapter
     private lateinit var recycler: RecyclerView
     private lateinit var service: PlaceHolder
-    val productObj= Product("","Ron Cartavio",50,"Lorem lor as  dsllroes lreosd lsdoers sdleorslre sldeosasl das",100,"https://licoreriadisenzo.pe/wp-content/uploads/2020/09/CARTAVIO-BLACK-750-ML-300x300.jpg","6332876c1cde739d4af5e7c2","6335fe7c5968fe469e3bdd71")
+    val productObj= Product("Ron Cartavio",50,"Lorem lor as  dsllroes lreosd lsdoers sdleorslre sldeosasl das",100,"https://licoreriadisenzo.pe/wp-content/uploads/2020/09/CARTAVIO-BLACK-750-ML-300x300.jpg","6332876c1cde739d4af5e7c2","6335fe7c5968fe469e3bdd71")
 
 
 
@@ -97,8 +97,7 @@ class Home : Fragment() {
                     for(item in pro){
                         listProd.add(
                             Product(
-                                item._id
-                                ,item.name
+                                item.name
                                 ,item.unitPrice
                                 ,item.description
                                 ,item.stock
@@ -124,7 +123,7 @@ class Home : Fragment() {
         btnAdd.setOnClickListener(){
             service.addProduct(productObj).enqueue(object :Callback<Product>{
                 override fun onResponse(call: Call<Product>, response: Response<Product>) {
-                    val toast: Toast = Toast.makeText(context,"${response.body()}", Toast.LENGTH_LONG);
+                    val toast: Toast = Toast.makeText(context,"${response}", Toast.LENGTH_LONG);
                     toast.show()
                 }
 

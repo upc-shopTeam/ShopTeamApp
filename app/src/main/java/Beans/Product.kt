@@ -2,7 +2,6 @@ package Beans
 
 class Product {
 
- var _id:String
  var name:String
  var unitPrice: Number
  var description: String
@@ -12,7 +11,6 @@ class Product {
  var category:String
 
  constructor(
-  _id:String,
   name: String,
   unitPrice: Number,
   description: String,
@@ -21,7 +19,6 @@ class Product {
   campus: String,
   category: String
  ) {
-  this._id=_id
   this.name = name
   this.unitPrice = unitPrice
   this.description = description

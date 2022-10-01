@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 
 class ProductViewHolder(view: View): RecyclerView.ViewHolder(view) {
-    val productId = view.findViewById<TextView>(R.id.txtId)
+   // val productId = view.findViewById<TextView>(R.id.txtId)
     val productName= view.findViewById<TextView>(R.id.txtName)
     val productUnitPrice= view.findViewById<TextView>(R.id.txtPrice)
     val productDescription = view.findViewById<TextView>(R.id.txtDescription)
@@ -19,7 +19,6 @@ class ProductViewHolder(view: View): RecyclerView.ViewHolder(view) {
     //val productCategory= view.findViewById<TextView>(R.id.txtCategory)
 
     fun render(productModel: Product){
-        productId.text=productModel._id
         productName.text = productModel.name
         productUnitPrice.text="Price: S/" + productModel.unitPrice
         productDescription.text=productModel.description
