@@ -3,7 +3,6 @@ package com.example.shopteamapp
 import Interface.PlaceHolder
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.inputmethod.InputBinding
 import androidx.fragment.app.Fragment
 import com.example.shopteamapp.databinding.ActivityMainBinding
 import retrofit2.Retrofit
@@ -45,4 +44,5 @@ class MainActivity : AppCompatActivity() {
         fragmentTransaction.replace(R.id.frame_layout,fragment)
         fragmentTransaction.commit()
     }
+
 }
