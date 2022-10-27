@@ -1,15 +1,9 @@
 package com.example.shopteamapp
 
 import Beans.Product
-import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
-import android.view.View.OnClickListener
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.AdapterView.OnItemClickListener
 import androidx.recyclerview.widget.RecyclerView
-import org.json.JSONObject
 
 class ProductAdapter(val productList: List<Product>):RecyclerView.Adapter<ProductViewHolder>() {
 

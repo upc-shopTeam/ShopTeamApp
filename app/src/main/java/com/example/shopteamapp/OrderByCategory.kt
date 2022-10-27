@@ -1,6 +1,5 @@
 package com.example.shopteamapp
 
-import Beans.Category
 import Beans.Product
 import Interface.PlaceHolder
 import android.annotation.SuppressLint
@@ -9,9 +8,7 @@ import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import retrofit2.Call
 import retrofit2.Response
