@@ -7,6 +7,9 @@
     <item android:title="Customers"
         android:id="@+id/profile"
         android:icon="@drawable/ic_baseline_man_24"/>
+    <item android:title="Debt"
+        android:id="@+id/debt"
+        android:icon="@drawable/ic_baseline_point_of_sale_24"/>
 
     <item android:title="Balances"
         android:id="@+id/balance"
@@ -15,4 +18,6 @@
     <item android:title="Settings"
         android:id="@+id/settings"
         android:icon="@drawable/ic_baseline_settings_24"/>
+
+
 </menu>

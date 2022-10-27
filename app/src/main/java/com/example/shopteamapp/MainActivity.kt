@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.profile -> replaceFragment(Profile())
                 R.id.settings -> replaceFragment(Settings())
                 R.id.balance->replaceFragment(Balance())
-
+                R.id.debt->replaceFragment(Debt())
                 else ->{
 
                 }
