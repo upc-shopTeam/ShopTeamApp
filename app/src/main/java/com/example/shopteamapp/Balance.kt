@@ -19,7 +19,7 @@ private const val ARG_PARAM2 = "param2"
  * Use the [Settings.newInstance] factory method to
  * create an instance of this fragment.
  */
-class Settings : Fragment() {
+class Balance : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -42,7 +42,7 @@ class Settings : Fragment() {
 
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_settings, container, false)
+        return inflater.inflate(R.layout.fragment_balance, container, false)
 
 
     }

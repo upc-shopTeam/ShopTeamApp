@@ -3,6 +3,7 @@ package com.example.shopteamapp
 import Interface.PlaceHolder
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Button
 import androidx.fragment.app.Fragment
 import com.example.shopteamapp.databinding.ActivityMainBinding
 import retrofit2.Retrofit
@@ -19,17 +20,27 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         replaceFragment(Home())
+
+
+
+
+
+
+
         binding.buttonNavigationView.setOnItemSelectedListener {
             when(it.itemId){
                 R.id.home -> replaceFragment(Home())
                 R.id.profile -> replaceFragment(Profile())
                 R.id.settings -> replaceFragment(Settings())
+                R.id.balance->replaceFragment(Balance())
 
                 else ->{
 
                 }
             }
+
             true
+
         }
         val retrofit = Retrofit.Builder()
             .baseUrl("https://my-json-server.typicode.com/LITO-TR/bdShop/")
