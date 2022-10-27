@@ -1,5 +1,6 @@
 package com.example.shopteamapp
 
+import Beans.Category
 import Beans.Product
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -14,11 +15,7 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import Interface.PlaceHolder
-import android.widget.Button
-import android.widget.ImageButton
-import android.widget.TextView
-import android.widget.Toast
-import com.google.android.material.floatingactionbutton.FloatingActionButton
+import androidx.recyclerview.widget.GridLayoutManager
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -39,8 +36,10 @@ class Home : Fragment() {
     private var param2: String? = null
 
     private lateinit var productAdapter: ProductAdapter
+    private lateinit var categoryAdapter: CategoryAdapter
     private lateinit var recycler: RecyclerView
     private lateinit var service: PlaceHolder
+
     val productObj= Product("Ron Cartavio",50,"Lorem lor as  dsllroes lreosd lsdoers sdleorslre sldeosasl das",100,"https://licoreriadisenzo.pe/wp-content/uploads/2020/09/CARTAVIO-BLACK-750-ML-300x300.jpg","6332876c1cde739d4af5e7c2","6335fe7c5968fe469e3bdd71")
 
 
@@ -51,7 +50,7 @@ class Home : Fragment() {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
-        productAdapter = ProductAdapter(mutableListOf())
+
         val retrofit = Retrofit.Builder()
             .baseUrl("https://express-shopapi.herokuapp.com/")
             .addConverterFactory(GsonConverterFactory.create())
@@ -88,37 +87,85 @@ class Home : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
         super.onViewCreated(view, savedInstanceState)
-        service.getListProducts().enqueue(object : Callback<List<Product>> {
-            override fun onResponse(call: Call<List<Product>>, response: Response<List<Product>>) {
-                val pro=response?.body()
-                val listProd= mutableListOf<Product>()
-                if(pro!= null){
-                    for(item in pro){
-                        listProd.add(
-                            Product(
-                                item.name
-                                ,item.unitPrice
-                                ,item.description
-                                ,item.stock
-                                ,item.img
-                                ,item.campus
-                                ,item.category
+
+                    //getProductsByCategory(item._id)
+
+                    service.getListProducts().enqueue(object : Callback<List<Product>> {
+                        override fun onResponse(
+                            call: Call<List<Product>>,
+                            response: Response<List<Product>>
+                        ) {
+                            val listProd= mutableListOf<Product>();
+
+                            val pro=response?.body()
+                            if(pro!= null){
+                                for(item in pro){
+                                    listProd.add(
+                                        Product(
+                                            item.name
+                                            ,item.unitPrice
+                                            ,item.description
+                                            ,item.stock
+                                            ,item.img
+                                            ,item.campus
+                                            ,item.category
+                                        )
+                                    )
+                                }
+                            }
+
+                            val layoutManager = GridLayoutManager(context,2)
+                            recycler=view.findViewById(R.id.recyclerInventory)
+                            recycler.layoutManager=layoutManager
+                            recycler.setHasFixedSize(true)
+                            productAdapter= ProductAdapter(listProd)
+                            recycler.adapter=productAdapter
+
+                        }
+
+                        override fun onFailure(call: Call<List<Product>>, t: Throwable) {
+                            t?.printStackTrace()
+                        }
+
+                    })
+
+        service.getCategories().enqueue(object : Callback<List<Category>>{
+            override fun onResponse(
+                call: Call<List<Category>>,
+                response: Response<List<Category>>
+            ) {
+                val listCategory = mutableListOf<Category>();
+                val cat = response?.body()
+                if(cat!=null){
+                    for (item in cat){
+                        listCategory.add(
+                            Category(item._id,item.name,
+                                item.img
                             )
                         )
                     }
                 }
-                val layoutManager = LinearLayoutManager(context)
-                recycler=view.findViewById(R.id.recyclerInventory)
+                val layoutManager = LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false)
+                recycler=view.findViewById(R.id.recyclerCategory)
                 recycler.layoutManager=layoutManager
                 recycler.setHasFixedSize(true)
-                productAdapter= ProductAdapter(listProd)
-                recycler.adapter=productAdapter
+                categoryAdapter= CategoryAdapter(listCategory)
+                recycler.adapter=categoryAdapter
+
+
+
             }
-            override fun onFailure(call: Call<List<Product>>, t: Throwable) {
+
+            override fun onFailure(call: Call<List<Category>>, t: Throwable) {
                 t?.printStackTrace()
             }
+
         })
+
+
+/*
         val btnAdd=view.findViewById<FloatingActionButton>(R.id.btnAddProduct)
         btnAdd.setOnClickListener(){
             service.addProduct(productObj).enqueue(object :Callback<Product>{
@@ -132,6 +179,9 @@ class Home : Fragment() {
 
             })
         }
+*/
+
+
 
         /*val btnDelete=view.findViewById<Button>(R.id.btnDelete)
 
@@ -149,7 +199,7 @@ class Home : Fragment() {
             })
         }*/
 
+
     }
-
-
 }
+
