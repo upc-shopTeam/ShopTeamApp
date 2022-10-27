@@ -1,10 +1,11 @@
 package com.example.shopteamapp
-import Beans.Debt
+
+import Beans.Product
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 
-class DebtAdapter(val debtList: List<Debt>):RecyclerView.Adapter<DebtViewHolder>() {
+class DebtAdapter(val productList: List<Product>):RecyclerView.Adapter<DebtViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DebtViewHolder {
         var layoutInflater=LayoutInflater.from(parent.context)
@@ -12,8 +13,8 @@ class DebtAdapter(val debtList: List<Debt>):RecyclerView.Adapter<DebtViewHolder>
     }
 
     override fun onBindViewHolder(holder: DebtViewHolder, position: Int) {
-        val item = debtList[position]
+        val item = productList[position]
         holder.render(item)
     }
-    override fun getItemCount(): Int = debtList.size
+    override fun getItemCount(): Int = productList.size
 }
