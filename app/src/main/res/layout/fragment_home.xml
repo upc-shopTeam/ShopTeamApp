@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Home">
 
     <!-- TODO: Update blank fragment layout -->
@@ -15,15 +16,28 @@
         android:layout_height="wrap_content"
         android:text="Inventory"
         android:textSize="29dp"
-        android:textStyle="bold"
-        android:layout_marginStart="4dp"/>
-
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="match_parent"
+        android:textStyle="normal"
+        android:layout_marginStart="4dp"
+        android:paddingBottom="10dp"
+        android:textAlignment="center"/>
+    <TextView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/recyclerInventory"
-        tools:listitem="@layout/item_product"/>
+        android:id="@+id/txtTemp"
+        />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/recyclerCategory"
+            tools:listitem="@layout/item_category"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/recyclerInventory"
+            tools:listitem="@layout/item_product"
+            android:layout_marginStart="25dp"/>
     </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
