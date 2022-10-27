@@ -1,7 +1,7 @@
 package Beans
 
 class Product {
-
+ var _id: String
  var name:String
  var unitPrice: Number
  var description: String
