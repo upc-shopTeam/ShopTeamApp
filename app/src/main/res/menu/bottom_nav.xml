@@ -9,7 +9,7 @@
         android:icon="@drawable/ic_baseline_man_24"/>
     <item android:title="Debt"
         android:id="@+id/debt"
-        android:icon="@drawable/ic_baseline_man_24"/>
+        android:icon="@drawable/ic_baseline_point_of_sale_24"/>
 
     <item android:title="Balances"
         android:id="@+id/balance"
